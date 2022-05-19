@@ -1,5 +1,7 @@
 package com.forflow.springinterview.service;
 
+import com.forflow.springinterview.entity.CityFactory;
+import com.forflow.springinterview.repository.CityRepository;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -12,6 +14,13 @@ import com.forflow.springinterview.dto.GeoDBResponse;
 
 @Service
 public class CityService {
+
+    private final CityRepository cityRepository;
+
+    public CityService(CityRepository cityRepository) {
+        this.cityRepository = cityRepository;
+        cityRepository.saveAll(CityFactory.createSampleDataCities());
+    }
 
     public ResponseEntity<GeoDBResponse> getCityByWikiDataId(String wikiDataId) {
         RestTemplate restTemplate = new RestTemplate();

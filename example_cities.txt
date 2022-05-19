@@ -1,0 +1,15 @@
+Los Angeles: Q65
+
+Paris: Q90
+
+Rome: Q220
+
+London: Q84
+
+Tokio: Q1490
+
+Kuala Lumpur: Q1865
+
+Madrid: Q2807
+
+Rio de Janeiro: Q8678

@@ -31,6 +31,7 @@ public class CityController {
         CityOutboundDTO result = cityServiceCached.getCityByWikiDataId(wikiDataId);
         if (result == null) {
             result = cityServiceExternalAPI.getCityByWikiDataId(wikiDataId);
+            if (result != null) cityServiceCached.save(result);
         }
         return new ResponseEntity<>(result, HttpStatus.OK);
     }

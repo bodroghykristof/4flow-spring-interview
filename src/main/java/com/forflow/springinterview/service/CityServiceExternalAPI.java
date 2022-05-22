@@ -37,4 +37,10 @@ public class CityServiceExternalAPI implements CityService {
         return CityOutboundDTOMapper.createFrom(responseEntity.getBody());
     }
 
+    @Override
+    public void save(CityOutboundDTO city) {
+        // we only have read-access to 3rd party API there is no mean to update its data
+        throw new UnsupportedOperationException();
+    }
+
 }

@@ -19,6 +19,7 @@ public class CityOutboundDTOMapper {
         city.setCountryIsoCode(data.getCountryCode());
         return city;
     }
+
     public static CityOutboundDTO createFrom(City cityEntity) {
         if (cityEntity == null) return null;
         CityOutboundDTO city = new CityOutboundDTO();
@@ -29,5 +30,4 @@ public class CityOutboundDTOMapper {
         city.setCountryIsoCode(cityEntity.getCountryIsoCode());
         return city;
     }
-
 }

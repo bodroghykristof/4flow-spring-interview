@@ -13,6 +13,7 @@ import com.forflow.springinterview.service.CityServiceExternalAPI;
 @RestController
 @RequestMapping(CityController.ROOT_PATH)
 public class CityController {
+
     public static final String ROOT_PATH = "city";
     private final CityServiceExternalAPI cityService;
 

@@ -1,7 +1,7 @@
 package com.forflow.springinterview.controller;
 
+import com.forflow.springinterview.exception.CityNotFoundException;
 import com.forflow.springinterview.service.CityService;
-import com.forflow.springinterview.service.CityServiceCached;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,8 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.forflow.springinterview.dto.CityOutboundDTO;
-import com.forflow.springinterview.dto.GeoDBResponse;
-import com.forflow.springinterview.service.CityServiceExternalAPI;
+import com.forflow.springinterview.dto.wftgeodb.GeoDBResponse;
 
 @RestController
 @RequestMapping(CityController.ROOT_PATH)
@@ -31,7 +30,11 @@ public class CityController {
         CityOutboundDTO result = cityServiceCached.getCityByWikiDataId(wikiDataId);
         if (result == null) {
             result = cityServiceExternalAPI.getCityByWikiDataId(wikiDataId);
-            if (result != null) cityServiceCached.save(result);
+            if (result != null) {
+                cityServiceCached.save(result);
+            } else {
+                throw new CityNotFoundException();
+            }
         }
         return new ResponseEntity<>(result, HttpStatus.OK);
     }

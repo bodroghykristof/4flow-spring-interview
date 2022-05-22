@@ -3,8 +3,12 @@ package com.forflow.springinterview.dto;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 @Getter @Setter
-public class CityOutboundDTO {
+public class CityOutboundDTO implements Serializable {
+
+    private static final long serialVersionUID = -3995222090774711133L;
 
     private String name;
 

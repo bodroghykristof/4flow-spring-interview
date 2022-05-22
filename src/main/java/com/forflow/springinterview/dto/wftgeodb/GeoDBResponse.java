@@ -1,10 +1,14 @@
-package com.forflow.springinterview.dto;
+package com.forflow.springinterview.dto.wftgeodb;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.io.Serializable;
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class GeoDBResponse {
+public class GeoDBResponse implements Serializable {
+
+    private static final long serialVersionUID = 98120010173479130L;
 
     @JsonProperty("data")
     private Data data;

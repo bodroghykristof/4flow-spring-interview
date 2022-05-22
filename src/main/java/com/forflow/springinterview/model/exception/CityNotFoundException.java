@@ -1,4 +1,4 @@
-package com.forflow.springinterview.exception;
+package com.forflow.springinterview.model.exception;
 
 import lombok.Getter;
 import lombok.Setter;

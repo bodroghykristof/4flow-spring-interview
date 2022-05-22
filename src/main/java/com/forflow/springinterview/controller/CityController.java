@@ -1,7 +1,7 @@
 package com.forflow.springinterview.controller;
 
-import com.forflow.springinterview.exception.CityNotFoundException;
-import com.forflow.springinterview.exception.InvalidParameterException;
+import com.forflow.springinterview.model.exception.CityNotFoundException;
+import com.forflow.springinterview.model.exception.InvalidParameterException;
 import com.forflow.springinterview.service.CityService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -11,8 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.forflow.springinterview.dto.rest.CityOutboundDTO;
-import com.forflow.springinterview.dto.wftgeodb.GeoDBResponse;
+import com.forflow.springinterview.model.dto.rest.CityOutboundDTO;
 
 @Slf4j
 @RestController

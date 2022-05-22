@@ -2,18 +2,18 @@ package com.forflow.springinterview.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.forflow.springinterview.dto.wftgeodb.GeoDBError;
-import com.forflow.springinterview.dto.wftgeodb.GeoDBErrorResponse;
-import com.forflow.springinterview.dto.wftgeodb.GeoDbErrorCode;
-import com.forflow.springinterview.mapper.CityOutboundDTOMapper;
+import com.forflow.springinterview.model.dto.wftgeodb.GeoDBError;
+import com.forflow.springinterview.model.dto.wftgeodb.GeoDBErrorResponse;
+import com.forflow.springinterview.model.dto.wftgeodb.GeoDbErrorCode;
+import com.forflow.springinterview.model.mapper.CityOutboundDTOMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 
-import com.forflow.springinterview.dto.rest.CityOutboundDTO;
-import com.forflow.springinterview.dto.wftgeodb.GeoDBResponse;
+import com.forflow.springinterview.model.dto.rest.CityOutboundDTO;
+import com.forflow.springinterview.model.dto.wftgeodb.GeoDBResponse;
 
 @Service
 @Slf4j

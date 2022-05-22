@@ -1,4 +1,4 @@
-package com.forflow.springinterview.dto.wftgeodb;
+package com.forflow.springinterview.model.dto.wftgeodb;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

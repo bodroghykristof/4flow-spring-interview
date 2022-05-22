@@ -1,10 +1,10 @@
 package com.forflow.springinterview.service;
 
-import com.forflow.springinterview.dto.rest.CityOutboundDTO;
-import com.forflow.springinterview.entity.City;
-import com.forflow.springinterview.entity.CityFactory;
-import com.forflow.springinterview.mapper.CityMapper;
-import com.forflow.springinterview.mapper.CityOutboundDTOMapper;
+import com.forflow.springinterview.model.dto.rest.CityOutboundDTO;
+import com.forflow.springinterview.model.entity.City;
+import com.forflow.springinterview.model.entity.CityFactory;
+import com.forflow.springinterview.model.mapper.CityMapper;
+import com.forflow.springinterview.model.mapper.CityOutboundDTOMapper;
 import com.forflow.springinterview.repository.CityRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;

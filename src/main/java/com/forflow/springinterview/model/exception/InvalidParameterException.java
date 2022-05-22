@@ -1,4 +1,4 @@
-package com.forflow.springinterview.exception;
+package com.forflow.springinterview.model.exception;
 
 public class InvalidParameterException extends RuntimeException {
 

@@ -1,8 +1,8 @@
 package com.forflow.springinterview.controller;
 
-import com.forflow.springinterview.dto.rest.ErrorResponseDTO;
-import com.forflow.springinterview.exception.CityNotFoundException;
-import com.forflow.springinterview.exception.InvalidParameterException;
+import com.forflow.springinterview.model.dto.rest.ErrorResponseDTO;
+import com.forflow.springinterview.model.exception.CityNotFoundException;
+import com.forflow.springinterview.model.exception.InvalidParameterException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

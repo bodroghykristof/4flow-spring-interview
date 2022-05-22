@@ -1,6 +1,6 @@
 package com.forflow.springinterview.repository;
 
-import com.forflow.springinterview.entity.City;
+import com.forflow.springinterview.model.entity.City;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

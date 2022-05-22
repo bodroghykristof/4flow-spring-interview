@@ -1,4 +1,4 @@
-package com.forflow.springinterview.entity;
+package com.forflow.springinterview.model.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

@@ -1,4 +1,4 @@
-package com.forflow.springinterview.dto.rest;
+package com.forflow.springinterview.model.dto.rest;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

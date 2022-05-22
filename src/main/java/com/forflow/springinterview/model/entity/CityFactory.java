@@ -1,4 +1,4 @@
-package com.forflow.springinterview.entity;
+package com.forflow.springinterview.model.entity;
 
 import java.util.ArrayList;
 import java.util.List;

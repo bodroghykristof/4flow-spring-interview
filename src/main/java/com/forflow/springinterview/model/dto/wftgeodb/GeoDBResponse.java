@@ -1,8 +1,9 @@
-package com.forflow.springinterview.dto.wftgeodb;
+package com.forflow.springinterview.model.dto.wftgeodb;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -31,7 +32,9 @@ public class GeoDBResponse implements Serializable {
     }
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public static class Data {
+    public static class Data implements Serializable {
+
+        private static final long serialVersionUID = -2160663862450331946L;
 
         @JsonProperty("id")
         private Integer id;
@@ -62,7 +65,7 @@ public class GeoDBResponse implements Serializable {
         @JsonProperty("timezone")
         private String timezone;
         @JsonProperty("distance")
-        private Object distance;
+        private transient Object distance;
         @JsonProperty("deleted")
         private Boolean deleted;
         @JsonProperty("placeType")

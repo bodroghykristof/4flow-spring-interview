@@ -1,6 +1,6 @@
 package com.forflow.springinterview.service;
 
-import com.forflow.springinterview.dto.CityOutboundDTO;
+import com.forflow.springinterview.dto.rest.CityOutboundDTO;
 import com.forflow.springinterview.entity.City;
 import com.forflow.springinterview.entity.CityFactory;
 import com.forflow.springinterview.mapper.CityMapper;

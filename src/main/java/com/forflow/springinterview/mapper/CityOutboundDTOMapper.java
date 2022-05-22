@@ -1,6 +1,6 @@
 package com.forflow.springinterview.mapper;
 
-import com.forflow.springinterview.dto.CityOutboundDTO;
+import com.forflow.springinterview.dto.rest.CityOutboundDTO;
 import com.forflow.springinterview.dto.wftgeodb.GeoDBResponse;
 import com.forflow.springinterview.entity.City;
 import lombok.experimental.UtilityClass;

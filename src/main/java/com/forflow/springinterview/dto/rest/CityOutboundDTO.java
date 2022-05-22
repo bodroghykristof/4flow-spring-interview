@@ -1,4 +1,4 @@
-package com.forflow.springinterview.dto;
+package com.forflow.springinterview.dto.rest;
 
 import lombok.Getter;
 import lombok.Setter;

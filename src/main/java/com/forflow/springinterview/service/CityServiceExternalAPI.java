@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.forflow.springinterview.dto.wftgeodb.GeoDBError;
 import com.forflow.springinterview.dto.wftgeodb.GeoDBErrorResponse;
 import com.forflow.springinterview.dto.wftgeodb.GeoDbErrorCode;
-import com.forflow.springinterview.exception.CityNotFoundException;
 import com.forflow.springinterview.mapper.CityOutboundDTOMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.*;
@@ -13,7 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 
-import com.forflow.springinterview.dto.CityOutboundDTO;
+import com.forflow.springinterview.dto.rest.CityOutboundDTO;
 import com.forflow.springinterview.dto.wftgeodb.GeoDBResponse;
 
 @Service

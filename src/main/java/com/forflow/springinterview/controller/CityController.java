@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.forflow.springinterview.dto.CityOutboundDTO;
+import com.forflow.springinterview.dto.rest.CityOutboundDTO;
 import com.forflow.springinterview.dto.wftgeodb.GeoDBResponse;
 
 @Slf4j

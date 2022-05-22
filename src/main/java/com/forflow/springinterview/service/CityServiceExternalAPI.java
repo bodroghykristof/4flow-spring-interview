@@ -24,7 +24,7 @@ public class CityServiceExternalAPI implements CityService {
     private static final String HOST_HEADER_NAME ="x-rapidapi-host";
     private static final String KEY_HEADER_NAME = "x-rapidapi-key";
     private static final String HOST_VALUE = "wft-geo-db.p.rapidapi.com";
-    private static final String API_KEY = "3c0beb7455msheac4246653cbe61p1d6170jsndd04c7b08e83";
+    private static final String API_KEY = "3c0beb7455msheac4246653cbe61p1d6170jsndd04c7b08e83s";
 
     @Override
     public CityOutboundDTO getCityByWikiDataId(String wikiDataId) {

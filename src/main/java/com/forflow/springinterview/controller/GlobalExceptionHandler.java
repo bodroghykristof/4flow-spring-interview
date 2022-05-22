@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
 @Slf4j
@@ -16,12 +15,22 @@ import java.util.Date;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(value = CityNotFoundException.class)
-    public ResponseEntity<ErrorResponseDTO> handleCityNotFound(HttpServletRequest req, CityNotFoundException e) {
+    public ResponseEntity<ErrorResponseDTO> handleCityNotFound(CityNotFoundException e) {
         log.error("City was not found with wikiDataId {}", e.getWikiDataId());
-        ErrorResponseDTO response = new ErrorResponseDTO("City was not found with wikiDataId " + e.getWikiDataId(),
-                                                            HttpStatus.NOT_FOUND.value(),
-                                                            new Date());
-        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        return createErrorResponse("City was not found with wikiDataId " + e.getWikiDataId(), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(value = Exception.class)
+    public ResponseEntity<ErrorResponseDTO> handleUnexpectedError(Exception e) {
+        log.error("Unexpected error", e);
+        return createErrorResponse("An unexpected error occurred", HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    private ResponseEntity<ErrorResponseDTO> createErrorResponse(String message, HttpStatus status) {
+        ErrorResponseDTO response = new ErrorResponseDTO(message,
+                                                         status.value(),
+                                                         new Date());
+        return new ResponseEntity<>(response, status);
     }
 
 }

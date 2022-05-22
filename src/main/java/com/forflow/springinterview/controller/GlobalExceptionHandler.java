@@ -2,6 +2,7 @@ package com.forflow.springinterview.controller;
 
 import com.forflow.springinterview.dto.rest.ErrorResponseDTO;
 import com.forflow.springinterview.exception.CityNotFoundException;
+import com.forflow.springinterview.exception.InvalidParameterException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,8 +17,13 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(value = CityNotFoundException.class)
     public ResponseEntity<ErrorResponseDTO> handleCityNotFound(CityNotFoundException e) {
-        log.error("City was not found with wikiDataId {}", e.getWikiDataId());
-        return createErrorResponse("City was not found with wikiDataId " + e.getWikiDataId(), HttpStatus.NOT_FOUND);
+        log.error("City was not found for {}", e.getKeyword());
+        return createErrorResponse("City was not found for " + e.getKeyword(), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(value = InvalidParameterException.class)
+    public ResponseEntity<ErrorResponseDTO> handleInvalidParameterException(InvalidParameterException e) {
+        return createErrorResponse(e.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(value = Exception.class)

@@ -9,4 +9,6 @@ public interface CityRepository extends JpaRepository<City, Long> {
 
     City findByWikiDataId(String wikiDataId);
 
+    City findByNameIgnoreCase(String wikiDataId);
+
 }

@@ -33,4 +33,11 @@ public class CityServiceCached implements CityService {
         City entity = CityMapper.createFrom(city);
         cityRepository.save(entity);
     }
+
+    @Override
+    @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
+    public CityOutboundDTO getCityByName(String name) {
+        City city = cityRepository.findByNameIgnoreCase(name);
+        return CityOutboundDTOMapper.createFrom(city);
+    }
 }

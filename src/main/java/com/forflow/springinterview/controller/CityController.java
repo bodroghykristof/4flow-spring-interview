@@ -1,6 +1,7 @@
 package com.forflow.springinterview.controller;
 
 import com.forflow.springinterview.exception.CityNotFoundException;
+import com.forflow.springinterview.exception.InvalidParameterException;
 import com.forflow.springinterview.service.CityService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -29,7 +30,7 @@ public class CityController {
 
     @GetMapping("/wikiDataId/{wikiDataId}")
     public ResponseEntity<CityOutboundDTO> getCityByWikiDataId(@PathVariable String wikiDataId) {
-        log.info("CityController.getCityByWikiDataId :: incoming request to /wikiDataId/{}", wikiDataId);
+        log.info("CityController.getCityByWikiDataId :: incoming request to /city/wikiDataId/{}", wikiDataId);
         CityOutboundDTO result = cityServiceCached.getCityByWikiDataId(wikiDataId);
         if (result == null) {
             result = cityServiceExternalAPI.getCityByWikiDataId(wikiDataId);
@@ -42,9 +43,15 @@ public class CityController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    @GetMapping("/name/{name}")
-    public ResponseEntity<GeoDBResponse> getCityByName(@PathVariable String cityName) {
-        throw new UnsupportedOperationException();
+    @GetMapping("/name/{cityName}")
+    public ResponseEntity<CityOutboundDTO> getCityByName(@PathVariable String cityName) {
+        log.info("CityController.getCityByName :: incoming request to /city/name/{}", cityName);
+        if (cityName == null || cityName.length() < 5) {
+            throw new InvalidParameterException("City name must be at least 5 characters long");
+        }
+        CityOutboundDTO result = cityServiceCached.getCityByName(cityName.trim());
+        if (result == null) throw new CityNotFoundException(cityName);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
 }

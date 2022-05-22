@@ -74,4 +74,9 @@ public class CityServiceExternalAPI implements CityService {
         throw new UnsupportedOperationException();
     }
 
+    @Override
+    public CityOutboundDTO getCityByName(String name) {
+        return null;
+    }
+
 }

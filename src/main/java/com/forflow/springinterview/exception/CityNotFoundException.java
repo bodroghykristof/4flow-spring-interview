@@ -8,11 +8,11 @@ public class CityNotFoundException extends RuntimeException {
 
     private static final long serialVersionUID = 2165052286434733480L;
 
-    private String wikiDataId;
+    private String keyword;
 
-    public CityNotFoundException(String wikiDataId) {
+    public CityNotFoundException(String keyword) {
         super();
-        this.wikiDataId = wikiDataId;
+        this.keyword = keyword;
     }
 
 }

@@ -79,6 +79,7 @@ public class CityServiceExternalAPI implements CityService {
         Map<String, String> queryParameters = new HashMap<>();
         queryParameters.put(NAME_PREFIX_QUERY_PARAM_KEY, name);
         String fullURL = HttpUtil.addQueryParameters(GEO_DB_URL, queryParameters);
+
         while (fullURL != null) {
             ResponseEntity<GeoDBListResponse> responseEntity = sendGetRequest(fullURL, GeoDBListResponse.class);
             if (responseEntity.getBody() == null) {
@@ -92,13 +93,15 @@ public class CityServiceExternalAPI implements CityService {
             if (exactMatch.isPresent()) return CityOutboundDTOMapper.createFrom(exactMatch.get());
             String nextLink = responseEntity.getBody().getNextLink();
             fullURL = nextLink != null ? GEO_DB_BASE_URL + nextLink : null;
-            // this if here because of the rate limit define by the API, better approach would be manually setting limit and offset
+            // this if here because of the rate limit define by the API
+            // better approach would be manually setting limit and offset
             try {
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
         }
+
         return null;
     }
 

@@ -9,6 +9,7 @@ import com.forflow.springinterview.model.dto.wftgeodb.getbywikidataid.GeoDBError
 import com.forflow.springinterview.model.mapper.CityOutboundDTOMapper;
 import com.forflow.springinterview.util.HttpUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpStatusCodeException;
@@ -25,20 +26,22 @@ import java.util.Optional;
 @Slf4j
 public class CityServiceExternalAPI implements CityService {
 
-    private static final String GEO_DB_BASE_URL = "https://wft-geo-db.p.rapidapi.com";
-    private static final String GEO_DB_URL = "https://wft-geo-db.p.rapidapi.com/v1/geo/cities";
+    @Value("${geo_db.base_url}")
+    private String GEO_DB_BASE_URL;
+    @Value("${geo_db.host}")
+    private String HOST_VALUE;
+    @Value("${geo_db.api_key}")
+    private String API_KEY;
 
+    private static final String CITIES_PATH = "/v1/geo/cities";
     private static final String HOST_HEADER_NAME ="x-rapidapi-host";
     private static final String KEY_HEADER_NAME = "x-rapidapi-key";
-    private static final String HOST_VALUE = "wft-geo-db.p.rapidapi.com";
-    private static final String API_KEY = "3c0beb7455msheac4246653cbe61p1d6170jsndd04c7b08e83";
-
     private static final String NAME_PREFIX_QUERY_PARAM_KEY = "namePrefix";
 
     @Override
     public CityOutboundDTO getCityByWikiDataId(String wikiDataId) {
 
-        String fullURL = GEO_DB_URL + "/" + wikiDataId;
+        String fullURL = GEO_DB_BASE_URL + CITIES_PATH + "/" + wikiDataId;
 
         try {
             ResponseEntity<GeoDBResponse> responseEntity = sendGetRequest(fullURL, GeoDBResponse.class);
@@ -78,7 +81,7 @@ public class CityServiceExternalAPI implements CityService {
     public CityOutboundDTO getCityByName(String name) {
         Map<String, String> queryParameters = new HashMap<>();
         queryParameters.put(NAME_PREFIX_QUERY_PARAM_KEY, name);
-        String fullURL = HttpUtil.addQueryParameters(GEO_DB_URL, queryParameters);
+        String fullURL = HttpUtil.addQueryParameters(GEO_DB_BASE_URL + CITIES_PATH, queryParameters);
 
         while (fullURL != null) {
             ResponseEntity<GeoDBListResponse> responseEntity = sendGetRequest(fullURL, GeoDBListResponse.class);

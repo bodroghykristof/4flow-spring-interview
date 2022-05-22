@@ -7,6 +7,7 @@ import com.forflow.springinterview.dto.wftgeodb.GeoDBErrorResponse;
 import com.forflow.springinterview.dto.wftgeodb.GeoDbErrorCode;
 import com.forflow.springinterview.exception.CityNotFoundException;
 import com.forflow.springinterview.mapper.CityOutboundDTOMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpStatusCodeException;
@@ -16,6 +17,7 @@ import com.forflow.springinterview.dto.CityOutboundDTO;
 import com.forflow.springinterview.dto.wftgeodb.GeoDBResponse;
 
 @Service
+@Slf4j
 public class CityServiceExternalAPI implements CityService {
 
     private static final String GEO_DB_URL = "https://wft-geo-db.p.rapidapi.com/v1/geo/cities/";
@@ -35,32 +37,36 @@ public class CityServiceExternalAPI implements CityService {
         HttpEntity<?> requestEntity = new HttpEntity<>(headers);
         String fullURL = GEO_DB_URL + wikiDataId;
 
+        log.info("CityServiceExternalAPI.getCityByWikiDataId() :: calling {}", fullURL);
+
         try {
             ResponseEntity<GeoDBResponse> responseEntity = restTemplate.exchange(fullURL,
                                                                                  HttpMethod.GET,
                                                                                  requestEntity,
                                                                                  GeoDBResponse.class);
-            System.out.println(responseEntity.getBody());
             return CityOutboundDTOMapper.createFrom(responseEntity.getBody());
         } catch (HttpStatusCodeException e) {
-            if (HttpStatus.NOT_FOUND.equals(e.getStatusCode())) {
-                System.out.println("ERROR: " + e.getResponseBodyAsString());
-                GeoDBErrorResponse errorResponse = null;
-                try {
-                    errorResponse = new ObjectMapper().readValue(e.getResponseBodyAsString(), GeoDBErrorResponse.class);
-                    if (!errorResponse.getErrors().isEmpty()) {
-                        GeoDBError error = errorResponse.getErrors().get(0);
-                        if (GeoDbErrorCode.ENTITY_NOT_FOUND.toString().equals(error.getCode())) {
-                            throw new CityNotFoundException();
-                        }
-                    }
-                } catch (JsonProcessingException ex) {
-                    throw new RuntimeException(ex);
-                }
-                System.out.println("ERROR RESPONSE: " + errorResponse);
-            }
-            throw e;
+            return handleAPICallError(e);
         }
+    }
+
+    private CityOutboundDTO handleAPICallError(HttpStatusCodeException e) {
+        log.error("CityServiceExternalAPI.handleAPICallError() :: error while calling 3rd party API; error: " + e, e);
+        if (HttpStatus.NOT_FOUND.equals(e.getStatusCode())) {
+            try {
+                GeoDBErrorResponse errorResponse = new ObjectMapper().readValue(e.getResponseBodyAsString(), GeoDBErrorResponse.class);
+                log.error("CityServiceExternalAPI.handleAPICallError() :: error response: {}", errorResponse);
+                if (!errorResponse.getErrors().isEmpty()) {
+                    GeoDBError error = errorResponse.getErrors().get(0);
+                    if (GeoDbErrorCode.ENTITY_NOT_FOUND.toString().equals(error.getCode())) {
+                        return null;
+                    }
+                }
+            } catch (JsonProcessingException ex) {
+                throw new RuntimeException(ex);
+            }
+        }
+        throw e;
     }
 
     @Override

@@ -15,4 +15,11 @@ public class GeoDBErrorResponse implements Serializable {
 
     private List<GeoDBError> errors;
 
+    @Override
+    public String toString() {
+        return "GeoDBErrorResponse{" +
+                "errors=" + errors +
+                '}';
+    }
+
 }

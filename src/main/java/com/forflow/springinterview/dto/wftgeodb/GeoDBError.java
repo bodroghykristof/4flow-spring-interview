@@ -15,4 +15,12 @@ public class GeoDBError implements Serializable {
     private String code;
     private String message;
 
+    @Override
+    public String toString() {
+        return "GeoDBError{" +
+                "code='" + code + '\'' +
+                ", message='" + message + '\'' +
+                '}';
+    }
+
 }

@@ -19,7 +19,7 @@ public class CityServiceExternalAPI implements CityService {
     private static final String API_KEY = "3c0beb7455msheac4246653cbe61p1d6170jsndd04c7b08e83";
 
     @Override
-    public ResponseEntity<CityOutboundDTO> getCityByWikiDataId(String wikiDataId) {
+    public CityOutboundDTO getCityByWikiDataId(String wikiDataId) {
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         headers.add(HOST_HEADER_NAME, HOST_VALUE);
@@ -34,8 +34,7 @@ public class CityServiceExternalAPI implements CityService {
                                                                              GeoDBResponse.class);
 
         System.out.println(responseEntity.getBody());
-        CityOutboundDTO result = CityOutboundDTOMapper.createFrom(responseEntity.getBody());
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        return CityOutboundDTOMapper.createFrom(responseEntity.getBody());
     }
 
 }

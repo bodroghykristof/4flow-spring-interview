@@ -1,7 +1,8 @@
 package com.forflow.springinterview.model.mapper;
 
 import com.forflow.springinterview.model.dto.rest.CityOutboundDTO;
-import com.forflow.springinterview.model.dto.wftgeodb.GeoDBResponse;
+import com.forflow.springinterview.model.dto.wftgeodb.getbyname.GeoDBListResponse;
+import com.forflow.springinterview.model.dto.wftgeodb.getbywikidataid.GeoDBResponse;
 import com.forflow.springinterview.model.entity.City;
 import lombok.experimental.UtilityClass;
 
@@ -28,6 +29,17 @@ public class CityOutboundDTOMapper {
         city.setLongitude(cityEntity.getLongitude());
         city.setWikiDataId(cityEntity.getWikiDataId());
         city.setCountryIsoCode(cityEntity.getCountryIsoCode());
+        return city;
+    }
+
+    public static CityOutboundDTO createFrom(GeoDBListResponse.Data geoDBResponse) {
+        if (geoDBResponse == null) return null;
+        CityOutboundDTO city = new CityOutboundDTO();
+        city.setName(geoDBResponse.getName());
+        city.setLatitude(geoDBResponse.getLatitude());
+        city.setLongitude(geoDBResponse.getLongitude());
+        city.setWikiDataId(geoDBResponse.getWikiDataId());
+        city.setCountryIsoCode(geoDBResponse.getCountryCode());
         return city;
     }
 }

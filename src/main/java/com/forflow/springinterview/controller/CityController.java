@@ -49,7 +49,14 @@ public class CityController {
             throw new InvalidParameterException("City name must be at least 5 characters long");
         }
         CityOutboundDTO result = cityServiceCached.getCityByName(cityName.trim());
-        if (result == null) throw new CityNotFoundException(cityName);
+        if (result == null) {
+            result = cityServiceExternalAPI.getCityByName(cityName.trim());
+            if (result != null) {
+                cityServiceCached.save(result);
+            } else {
+                throw new CityNotFoundException(cityName);
+            }
+        }
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 

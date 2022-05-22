@@ -1,4 +1,4 @@
-package com.forflow.springinterview.model.dto.wftgeodb;
+package com.forflow.springinterview.model.dto.wftgeodb.getbywikidataid;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;

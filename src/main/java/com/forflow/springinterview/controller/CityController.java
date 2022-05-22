@@ -2,6 +2,7 @@ package com.forflow.springinterview.controller;
 
 import com.forflow.springinterview.service.CityService;
 import com.forflow.springinterview.service.CityServiceCached;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,8 +28,11 @@ public class CityController {
 
     @GetMapping("/wikiDataId/{wikiDataId}")
     public ResponseEntity<CityOutboundDTO> getCityByWikiDataId(@PathVariable String wikiDataId) {
-        return cityServiceExternalAPI.getCityByWikiDataId(wikiDataId);
-        // return cityServiceCached.getCityByWikiDataId(wikiDataId);
+        CityOutboundDTO result = cityServiceCached.getCityByWikiDataId(wikiDataId);
+        if (result == null) {
+            result = cityServiceExternalAPI.getCityByWikiDataId(wikiDataId);
+        }
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @GetMapping("/name/{name}")

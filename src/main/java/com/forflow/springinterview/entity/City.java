@@ -28,6 +28,8 @@ public class City {
     @Column(name = "COUNTRY_ISO_2")
     private String countryIsoCode;
 
+    public City() {}
+
     public City(String name, Double latitude, Double longitude, String wikiDataId, String countryIsoCode) {
         this.name = name;
         this.latitude = latitude;

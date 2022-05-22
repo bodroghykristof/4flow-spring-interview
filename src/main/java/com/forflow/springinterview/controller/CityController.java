@@ -1,5 +1,6 @@
 package com.forflow.springinterview.controller;
 
+import com.forflow.springinterview.service.CityService;
 import com.forflow.springinterview.service.CityServiceCached;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,10 +17,10 @@ import com.forflow.springinterview.service.CityServiceExternalAPI;
 public class CityController {
 
     public static final String ROOT_PATH = "city";
-    private final CityServiceExternalAPI cityServiceExternalAPI;
-    private final CityServiceCached cityServiceCached;
+    private final CityService cityServiceExternalAPI;
+    private final CityService cityServiceCached;
 
-    public CityController(CityServiceExternalAPI cityServiceExternalAPI, CityServiceCached cityServiceCached) {
+    public CityController(CityService cityServiceExternalAPI, CityService cityServiceCached) {
         this.cityServiceExternalAPI = cityServiceExternalAPI;
         this.cityServiceCached = cityServiceCached;
     }
